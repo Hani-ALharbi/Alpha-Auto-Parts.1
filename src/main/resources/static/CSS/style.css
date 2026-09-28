@@ -1,0 +1,374 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600&display=swap');
+
+:root {
+    --gold-primary: #C5A059;
+    --gold-dark: #A67C00;
+    --dark-primary: #1A1A1A;
+    --text-primary: #333333;
+    --text-muted: #888888;
+    --bg-gradient: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+    --glass-bg: rgba(255, 255, 255, 0.75);
+    --glass-border: rgba(255, 255, 255, 0.6);
+    --glass-shadow: 0 8px 32px rgba(31, 38, 135, 0.07);
+}
+
+body {
+    background: var(--bg-gradient);
+    background-attachment: fixed;
+    font-family: 'Inter', sans-serif;
+    color: var(--text-primary);
+    overflow-x: hidden;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-up {
+    animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Glassmorphism Classes */
+.glass-panel {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    border-radius: 16px;
+}
+
+/* --- Headers --- */
+.company-header {
+    text-align: center;
+    padding: 60px 0 30px 0;
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.company-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.8rem;
+    color: var(--dark-primary);
+    letter-spacing: 2px;
+    margin-bottom: 0;
+}
+
+.page-title {
+    font-weight: 300;
+    color: var(--gold-primary);
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    margin-top: 10px;
+    font-size: 1.1rem;
+}
+
+/* --- Containers --- */
+.content-container, .form-container {
+    max-width: 1200px;
+    margin: 0 auto 50px auto;
+    padding: 40px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    border-radius: 20px;
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.form-container {
+    max-width: 800px;
+}
+
+/* --- Menu Cards (Dashboard) --- */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.menu-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    border-radius: 16px;
+    padding: 40px 20px;
+    text-align: center;
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.menu-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 50%; height: 100%;
+    background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0) 100%);
+    transform: skewX(-25deg);
+    transition: all 0.7s;
+}
+
+.menu-card:hover::before {
+    left: 200%;
+}
+
+.menu-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(197, 160, 89, 0.2);
+    border-color: var(--gold-primary);
+    color: var(--dark-primary);
+}
+
+.menu-card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.menu-card-subtitle {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.menu-card i {
+    font-size: 3.5rem;
+    color: var(--gold-primary);
+    margin-bottom: 15px;
+    transition: transform 0.3s ease;
+}
+
+.menu-card:hover i {
+    transform: scale(1.1);
+}
+
+/* --- Tables --- */
+.table {
+    margin-bottom: 0;
+    background: transparent;
+}
+
+.table thead {
+    background-color: rgba(26, 26, 26, 0.05);
+}
+
+.table th {
+    color: var(--dark-primary);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    padding: 15px;
+    border-bottom: 2px solid var(--gold-primary) !important;
+}
+
+.table td {
+    padding: 15px;
+    vertical-align: middle;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    background: transparent !important;
+}
+
+.table tbody tr {
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.table tbody tr:hover {
+    background-color: rgba(197, 160, 89, 0.05) !important;
+    transform: scale(1.005);
+}
+
+/* Custom DataTables tweaks */
+.dataTables_wrapper .dataTables_filter input {
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    padding: 5px 10px;
+    margin-left: 10px;
+    outline: none;
+}
+.dataTables_wrapper .dataTables_filter input:focus {
+    border-color: var(--gold-primary);
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button.current {
+    background: var(--gold-primary) !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 6px;
+    box-shadow: 0 4px 10px rgba(197, 160, 89, 0.3);
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    background: var(--dark-primary) !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 6px;
+}
+
+/* --- Forms --- */
+.form-label {
+    color: var(--dark-primary);
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.form-control, .form-select {
+    border-radius: 8px;
+    border: 1px solid rgba(0,0,0,0.1);
+    padding: 12px;
+    font-size: 0.95rem;
+    background: rgba(255,255,255,0.8);
+    transition: all 0.3s;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--gold-primary);
+    box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.2);
+    background: #fff;
+    outline: none;
+}
+
+/* --- Buttons --- */
+.btn-insert, .btn-submit, .btn-enter {
+    background: linear-gradient(135deg, var(--dark-primary), #333);
+    color: #FFF;
+    border-radius: 8px;
+    padding: 12px 30px;
+    border: none;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.btn-insert:hover, .btn-submit:hover, .btn-enter:hover {
+    background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(197, 160, 89, 0.3);
+    color: #FFF;
+}
+
+.action-link {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.edit-link { color: var(--gold-primary); }
+.delete-link { color: #C0392B; }
+
+.action-link:hover {
+    opacity: 0.7;
+    text-decoration: underline;
+}
+
+/* --- Login Page --- */
+.login-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    /* Premium automotive dark background from Unsplash */
+    background: linear-gradient(135deg, rgba(26,26,26,0.9), rgba(26,26,26,0.8)), url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&q=80&w=1920');
+    background-size: cover;
+    background-position: center;
+}
+
+.login-box {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+    border-radius: 20px;
+    width: 100%;
+    max-width: 450px;
+    padding: 60px 40px;
+    text-align: center;
+    color: white;
+    animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.login-box .company-name {
+    color: #FFF;
+}
+
+.login-box .page-title {
+    color: var(--gold-primary);
+}
+
+.login-box .form-label {
+    color: #DDD;
+}
+
+.login-box .form-control {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: white;
+}
+
+.login-box .form-control::placeholder {
+    color: rgba(255,255,255,0.5);
+}
+
+.login-box .form-control:focus {
+    background: rgba(255,255,255,0.2);
+    border-color: var(--gold-primary);
+    box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.3);
+    color: white;
+}
+
+.btn-enter {
+    width: 100%;
+    margin-top: 15px;
+    padding: 15px;
+    font-size: 1.1rem;
+}
+
+/* --- Back Buttons --- */
+.btn-back {
+    background: rgba(26, 26, 26, 0.05);
+    color: var(--dark-primary);
+    border-radius: 8px;
+    padding: 10px 20px;
+    border: 1px solid rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-back:hover {
+    background: rgba(197, 160, 89, 0.1);
+    border-color: var(--gold-primary);
+    color: var(--gold-dark);
+    transform: translateX(-3px);
+}

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Orders Directory</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+    <header class="company-header">
+        <h1 class="company-name">ALPHA AUTO PARTS</h1>
+        <div class="page-title">Orders Directory</div>
+    </header>
+
+    <div class="content-container">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <p class="text-muted mb-0 small">Manage customer sales and orders</p>
+            <a th:href="@{/orders/new}" class="btn-insert">CREATE NEW ORDER</a>
+        </div>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th style="width: 10%">Order ID</th>
+                    <th style="width: 15%">Date</th>
+                    <th style="width: 10%">Cus. ID</th>
+                    <th style="width: 10%">Emp. ID</th>
+                    <th style="width: 10%">Part ID</th>
+                    <th style="width: 15%">Amount</th>
+                    <th style="width: 10%">Status</th>
+                    <th style="width: 20%" class="text-center">Operations</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="ord : ${listOrders}">
+                    <td th:text="${ord.orderID}" class="fw-bold"></td>
+                    <td th:text="${ord.orderDate}"></td>
+                    <td th:text="${ord.customerID}"></td>
+                    <td th:text="${ord.userID}"></td>
+                    <td th:text="${ord.partID}"></td>
+                    <td th:text="${ord.unitPriceID != null && pricesMap.get(ord.unitPriceID) != null ? pricesMap.get(ord.unitPriceID) : 0} + ' SAR'" class="fw-bold text-success"></td>
+                    
+                    <!-- تلوين الحالة بناءً على النص -->
+                    <td th:text="${ord.status != null && ord.status ? 'Completed' : 'Pending'}" 
+                        th:classappend="${ord.status != null && ord.status ? 'text-success fw-bold' : 'text-warning fw-bold'}">
+                    </td>
+                    
+                    <td class="text-center">
+                        <a th:href="@{'/orders/edit/' + ${ord.orderID}}" class="action-link edit-link me-2">EDIT</a>
+                        <a th:href="@{'/orders/delete/' + ${ord.orderID}}" class="action-link delete-link" 
+                           onclick="return confirm('Are you sure you want to delete this order?')">REMOVE</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="mt-4">
+            <a th:href="@{/dashboard}" class="cancel-link text-start">&larr; Back to Dashboard</a>
+        </div>
+    </div>
+
+</body>
+</html>

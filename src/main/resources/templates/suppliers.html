@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Suppliers Directory</title>
+    <!-- مكتبة البوتستراب -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- ملف التصميم الخارجي الموحد -->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+    <header class="company-header">
+        <h1 class="company-name">ALPHA AUTO PARTS</h1>
+        <div class="page-title">Suppliers Directory</div>
+    </header>
+
+    <div class="content-container">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <p class="text-muted mb-0 small">Registered partners in your system</p>
+            <a th:href="@{/suppliers/new}" class="btn-insert">INSERT NEW SUPPLIER</a>
+        </div>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th style="width: 10%">ID</th>
+                    <th style="width: 25%">Supplier Name</th>
+                    <th style="width: 20%">Phone</th>
+                    <th style="width: 25%">Location</th>
+                    <th style="width: 20%" class="text-center">Operations</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="sup : ${listSuppliers}">
+                    <td th:text="${sup.supplierID}"></td>
+                    <td th:text="${sup.name}" class="fw-bold"></td>
+                    <td th:text="${sup.phoneNumber}"></td>
+                    <td th:text="${sup.location}"></td>
+                    <td class="text-center">
+                        <a th:href="@{'/suppliers/edit/' + ${sup.supplierID}}" class="action-link edit-link me-3">EDIT</a>
+                        <a th:href="@{'/suppliers/delete/' + ${sup.supplierID}}" class="action-link delete-link" 
+                           onclick="return confirm('Are you sure you want to remove this supplier?')">REMOVE</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+         <div class="mt-4">
+            <a th:href="@{/dashboard}" class="cancel-link text-start">&larr; Back to Dashboard</a>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Brands Report</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
+</head>
+<body>
+    <header class="company-header">
+        <h1 class="company-name">ALPHA AUTO PARTS</h1>
+        <div class="page-title">Brands Analytics</div>
+    </header>
+    <div class="content-container">
+        <div class="d-flex justify-content-between align-items-center mb-5">
+            <h2 class="fw-bold text-dark">Supported Brands</h2>
+            <a th:href="@{/reports}" class="btn-insert" style="background-color: #888;">Back to Hub</a>
+        </div>
+        <div class="row g-4 mb-5">
+            <div class="col-md-6">
+                <div class="menu-card h-100 p-4">
+                    <i class="bi bi-award fs-1 mb-3 text-info"></i>
+                    <div class="menu-card-title" th:text="${totalBrands}">0</div>
+                    <div class="menu-card-subtitle">Registered Brands</div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="menu-card h-100 p-4 d-flex justify-content-center align-items-center">
+                    <canvas id="myChart" style="max-height: 120px;"></canvas>
+                </div>
+            </div>
+        </div>
+        <hr class="mb-5 text-muted">
+        
+        <!-- Filters Section -->
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <label for="statusFilter" class="form-label fw-bold">Filter by Status:</label>
+                <select id="statusFilter" class="form-select">
+                    <option value="">All Brands</option>
+                    <option value="true">Active (true)</option>
+                    <option value="false">Inactive (false)</option>
+                </select>
+            </div>
+        </div>
+        
+        <table id="dataTable" class="table display" width="100%">
+            <thead>
+                <tr><th>Brand ID</th><th>Brand Name</th><th>Made In</th><th>Active</th></tr>
+            </thead>
+            <tbody>
+                <tr th:each="brand : ${listBrands}">
+                    <td th:text="${brand.brandID}"></td><td th:text="${brand.nameBrand}"></td><td th:text="${brand.made}"></td><td th:text="${brand.active}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
+    <script th:inline="javascript">
+        /*<![CDATA[*/ var total = /*[[${totalBrands}]]*/ 0; /*]]>*/
+        
+        var commonButtons = [
+            'copy', 'csv', 'excel', 
+            {
+                extend: 'pdfHtml5',
+                title: 'ALPHA AUTO PARTS - Brands Report',
+                customize: function (doc) {
+                    doc.styles.title = { color: '#d1b280', fontSize: '20', alignment: 'center', bold: true };
+                    doc.content.splice(0, 0, { text: 'ALPHA AUTO PARTS', style: 'header', alignment: 'center', margin: [0, 0, 0, 10] });
+                    doc.styles.header = { fontSize: 24, bold: true, color: '#333333' };
+                    doc.styles.tableHeader = { fillColor: '#333333', color: 'white', alignment: 'center' };
+                }
+            },
+            'print'
+        ];
+        
+        $(document).ready(function() {
+            var table = $('#dataTable').DataTable({ dom: 'Bfrtip', buttons: commonButtons, pageLength: 10 });
+            $('#statusFilter').on('change', function() {
+                table.column(3).search(this.value).draw();
+            });
+        });
+        const ctx = document.getElementById('myChart').getContext('2d');
+        new Chart(ctx, { type: 'bar', data: { labels: ['Brands'], datasets: [{ label: 'Total', data: [total], backgroundColor: '#0dcaf0' }] }, options: { maintainAspectRatio: false } });
+    </script>
+</body>
+</html>

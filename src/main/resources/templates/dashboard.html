@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Main Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+    <header class="company-header">
+        <h1 class="company-name">ALPHA AUTO PARTS</h1>
+        <div class="page-title">Main Dashboard</div>
+    </header>
+
+    <div class="content-container" style="background: transparent; box-shadow: none; padding: 0;">
+        
+        <p class="text-center text-muted mb-4">Please select a module to manage your system data</p>
+
+        <!-- شبكة الكروت (Grid System) -->
+        <div class="dashboard-grid animate-fade-up">
+            
+            <!-- 1. Users -->
+            <a th:href="@{/users}" class="menu-card">
+                <i class="bi bi-people"></i>
+                <div class="menu-card-title">System Users</div>
+                <div class="menu-card-subtitle">Manage Staff & Admins</div>
+            </a>
+
+            <!-- 2. Suppliers -->
+            <a th:href="@{/suppliers}" class="menu-card">
+                <i class="bi bi-truck"></i>
+                <div class="menu-card-title">Suppliers</div>
+                <div class="menu-card-subtitle">Manage Partners</div>
+            </a>
+
+            <!-- 3. Spare Parts -->
+            <a th:href="@{/spare-parts}" class="menu-card">
+                <i class="bi bi-box-seam"></i>
+                <div class="menu-card-title">Spare Parts</div>
+                <div class="menu-card-subtitle">Inventory Control</div>
+            </a>
+
+            <!-- 4. Categories -->
+            <a th:href="@{/categories}" class="menu-card">
+                <i class="bi bi-tags"></i>
+                <div class="menu-card-title">Categories</div>
+                <div class="menu-card-subtitle">Parts Classifications</div>
+            </a>
+
+            <!-- 5. Brands -->
+            <a th:href="@{/brands}" class="menu-card">
+                <i class="bi bi-award"></i>
+                <div class="menu-card-title">Brands</div>
+                <div class="menu-card-subtitle">Manufacturer Info</div>
+            </a>
+
+            <!-- 6. Car Models -->
+            <a th:href="@{/car-models}" class="menu-card">
+                <i class="bi bi-car-front"></i>
+                <div class="menu-card-title">Car Models</div>
+                <div class="menu-card-subtitle">Supported Vehicles</div>
+            </a>
+
+            <!-- 7. Customers -->
+            <a th:href="@{/customers}" class="menu-card">
+                <i class="bi bi-person-lines-fill"></i>
+                <div class="menu-card-title">Customers</div>
+                <div class="menu-card-subtitle">Client Directory</div>
+            </a>
+
+            <!-- 8. Orders -->
+            <a th:href="@{/orders}" class="menu-card">
+                <i class="bi bi-cart-check"></i>
+                <div class="menu-card-title">Orders</div>
+                <div class="menu-card-subtitle">Sales Management</div>
+            </a>
+
+            <!-- 9. Unit Prices -->
+            <a th:href="@{/unit-prices}" class="menu-card">
+                <i class="bi bi-currency-dollar"></i>
+                <div class="menu-card-title">Unit Prices</div>
+                <div class="menu-card-subtitle">Pricing Configuration</div>
+            </a>
+            
+            <!-- 10. Reports -->
+            <a th:href="@{/reports}" class="menu-card" >
+                <i class="bi bi-graph-up-arrow"></i>
+                <div class="menu-card-title" >Reports & Analytics</div>
+                <div class="menu-card-subtitle">Power BI Insights</div>
+            </a>
+
+        </div>
+    </div>
+
+</body>
+</html>

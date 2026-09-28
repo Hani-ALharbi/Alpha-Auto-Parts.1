@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${pageTitle}">Add/Edit User</title>
+    <!-- مكتبة البوتستراب للأعمدة والأحجام -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- ربطنا ملف التصميم الخارجي اللي سويناه -->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+    <header class="company-header">
+        <h1 class="company-name">ALPHA AUTO PARTS</h1>
+        <div class="page-title" th:text="${pageTitle}">Add User</div>
+    </header>
+
+    <div class="form-container">
+        <form th:action="@{/users/save}" th:object="${user}" method="post">
+            <input type="hidden" th:field="*{userID}" />
+
+            <!-- السطر الأول: مربعين (نص بنص) -->
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label class="form-label">Username</label>
+                    <input type="text" th:field="*{username}" class="form-control" required />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Staff ID</label>
+                    <input type="number" th:field="*{staffID}" class="form-control" required />
+                </div>
+            </div>
+
+            <!-- السطر الثاني: مربعين (نص بنص) -->
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label class="form-label">Password</label>
+                    <input type="password" th:field="*{passwordHash}" class="form-control" required />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">User Role</label>
+                    <select th:field="*{typeUser}" class="form-select" required>
+                        <option value="">-- Select Role --</option>
+                        <option value="Admin">Admin</option>
+                        <option value="Staff">Staff</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- السطر الثالث: مربعين (نص بنص) -->
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label class="form-label">Phone Number</label>
+                    <input type="number" th:field="*{phoneNumber}" class="form-control" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" th:field="*{email}" class="form-control" />
+                </div>
+            </div>
+
+            <!-- السطر الرابع: ثلاث مربعات (نفس تقسيم الكمية في القطع) -->
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    <label class="form-label">Nationality</label>
+                    <input type="text" th:field="*{nationality}" class="form-control" />
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">National ID</label>
+                    <input type="number" th:field="*{nationalID}" class="form-control" />
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Date of Birth</label>
+                    <input type="number" th:field="*{dob}" class="form-control" placeholder="YYYYMMDD" />
+                </div>
+            </div>
+
+            <!-- السطر الخامس: الشيك بوكس (بنفس تنسيق وحواف القطع) -->
+            <div class="row mb-4">
+                <div class="col-md-12 d-flex align-items-end pb-2">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" th:field="*{active}" id="activeCheck">
+                        <label class="form-check-label form-label" for="activeCheck">
+                            Is Active Employee?
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-submit">SAVE USER</button>
+            <a th:href="@{/users}" class="cancel-link">Back to Directory</a>
+        </form>
+    </div>
+
+</body>
+</html>
